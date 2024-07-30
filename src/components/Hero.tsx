@@ -9,7 +9,7 @@ export const Hero = () => {
     <>
       <div className="bg-black text-white bg-[linear-gradient(to_bottom,#000,#200D42_30%,#4F21A1_65%,#A46EDB_90%)] py-[72px] sm:py-24 relative overflow-clip">
         {/* black circle */}
-      <div className="absolute bg-black h-[375px] w-[750px] sm:w-[1536px] sm:h-[768px] lg:w-[2400px] lg:h-[1200px]  rounded-[100%] -translate-x-1/2 left-1/2 border-[#B48CDE] bg-[radial-gradient(closest-side,#000_82%,#9560EB)] bottom-24 top-[calc(100%-96px)] sm:top-[calc(100%-120px)]     -z-1 "></div>
+      <div className="absolute bg-black h-[375px] w-[800px] sm:w-[1536px] sm:h-[768px] lg:w-[2800px] lg:h-[800px]  rounded-[100%] -translate-x-1/2 left-1/2 border-[#B48CDE] bg-[radial-gradient(closest-side,#000_82%,#9560EB)] bottom-24 top-[calc(100%-96px)] sm:top-[calc(100%-120px)]     -z-1 "></div>
         <div className="container relative">
           <div className="flex items-center justify-center">
             <a href="#" className="inline-flex gap-3 border py-2 px-4 rounded-lg border-gray-700 hover:border-gray-500 transition duration-300">
