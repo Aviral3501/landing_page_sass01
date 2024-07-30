@@ -29,3 +29,65 @@
 .animate-slide-in {
   animation: slideIn 0.3s ease-in-out;
 }
+
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.rainbow-text {
+  background: linear-gradient(90deg, red, orange, yellow, rgb(17, 210, 17), violet,yellow,white);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: rainbow 4s linear infinite;
+}
+
+
+@keyframes rainbow-border {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.bg-gradient-border {
+  background: linear-gradient(45deg, red, orange, yellow, rgb(1, 255, 242), blue, rgb(255, 0, 0), violet);
+  background-size: 400% 400%;
+  animation: rainbow-border 4s ease infinite;
+  border-radius: 0.5rem; /* Match the button's border radius */
+  padding: 2px; /* Creates space for the gradient border */
+  display: inline-block;
+  position: relative;
+}
+
+.bg-gradient-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: inherit;
+  z-index: -1;
+}
+
+
+
+
+
