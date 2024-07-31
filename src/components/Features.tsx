@@ -33,9 +33,9 @@ export const Features = () => {
           Set tasks, get reminders, and see your progress simply and quickly.
         </p>
        </div>
-        <div className="flex flex-col sm:flex-row gap-4 lg:gap-10 mt-6 md:mt-10 ">
+        <div className="flex flex-col mx-[40px] gap-6  sm:flex-row  lg:gap-10 mt-6 md:mt-10 ">
           {features.map(({title,description})=>(
-            <div key={title} className=" border-white/30 rounded-xl px-5 py-10 text-center sm:flex-1 rainbow-border border-2">
+            <div key={title} className=" border-white/30 rounded-xl px-5 py-16 text-center sm:flex-1 rainbow-border border-2">
               <div className="inline-flex h-10 w-10 bg-white text-black justify-center items-center rounded-lg">
                 <EcosystemIcon/>
               </div>
