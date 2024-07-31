@@ -13,7 +13,7 @@
 
 @keyframes slideIn {
   from {
-    transform: translateY(-10px);
+    transform: translateY(20px);
     opacity: 0;
   }
   to {
@@ -101,5 +101,32 @@
   display: flex;
   animation: scroll 20s linear infinite;
   will-change: transform;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 1s ease-in-out;
+}
+
+.animate-zoom-in {
+  animation: zoomIn 1s ease-in-out;
+}
+
+.opacity-0 {
+  opacity: 0;
 }
 
