@@ -3,6 +3,7 @@ import Image from "next/image";
 import ArrowIcon from "../assets/icons/arrow-w.svg";
 import cursorImage from "../assets/images/cursor.png";
 import messageImage from "../assets/images/message.png";
+import {motion} from "framer-motion";
 
 export const Hero = () => {
   return (
@@ -25,8 +26,12 @@ export const Hero = () => {
          <div className="flex justify-center items-center mt-8">
         <div className="inline-flex relative">
         <h1 className="text-7xl sm:text-8xl font-bold tracking-tighter text-center  inline-flex">One Task <br/> at a time</h1>
-        <Image src={cursorImage} alt={"cursorImage"} height={200} width={200} className="absolute top-[125px] right-[476px]   lg:right-[580px]   hidden sm:inline "/>
-        <Image src={messageImage} alt={"messageImage"} height={200} width={200} className="absolute top-[15px] left-[450px]   lg:left-[580px]      hidden sm:inline"/>
+        <motion.div className="absolute top-[125px] right-[476px]   lg:right-[580px]   hidden sm:inline ">
+        <Image src={cursorImage} alt={"cursorImage"} height={200} width={200} className="max-w-none"/>
+        </motion.div>
+        <motion.div className="absolute top-[15px] left-[450px]   lg:left-[580px]      hidden sm:inline">
+        <Image src={messageImage} alt={"messageImage"} height={200} width={200} className=" max-w-none"/>
+        </motion.div>
         </div>
          </div>
          <div className="flex  justify-center items-center">
