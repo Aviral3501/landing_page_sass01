@@ -43,7 +43,7 @@ const AccordionItem = ({
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center justify-center  md:max-w-4xl mx-auto mt-2">
-          <span className="flex-1 text-xl lg:text-2xl font-bold">
+          <span className="flex-1 text-lg sm:text-xl font-bold">
             {question}
           </span>
           {isOpen ? <MinusIcon /> : <PlusIcon />}
@@ -78,7 +78,7 @@ export const FAQs = () => {
           <h2 className=" text-center tracking-tight text-5xl font-bold sm:text-7xl">
             Frequently asked questions
           </h2>
-          <div className="mt-10 lg:mt-[45px] max-w-3xl mx-auto px-10 lg:p-0">
+          <div className="mt-10 lg:mt-[45px] max-w-2xl mx-auto px-10 lg:p-0">
             {items.map(({ question, answer }) => (
               <AccordionItem
                 question={question}
