@@ -8,6 +8,8 @@ import { motion, useTransform, useMotionValue } from "framer-motion";
 export const CallToAction = () => {
   const [mouseX, setMouseX] = useState<number>(0);
   const [mouseY, setMouseY] = useState<number>(0);
+  const [windowWidth, setWindowWidth] = useState<number>(0);
+  const [windowHeight, setWindowHeight] = useState<number>(0);
 
   // Define motion values for parallax effect
   const helixX = useMotionValue(0);
@@ -16,30 +18,36 @@ export const CallToAction = () => {
   const starY = useMotionValue(0);
 
   // Transform motion values based on mouse position
-  const helixXTransform = useTransform(helixX, [0, window.innerWidth], [-50, 50]);
-  const helixYTransform = useTransform(helixY, [0, window.innerHeight], [-30, 30]);
-  const starXTransform = useTransform(starX, [0, window.innerWidth], [-40, 40]);
-  const starYTransform = useTransform(starY, [0, window.innerHeight], [-20, 20]);
-
-  // Update motion values based on mouse position
-  useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      setMouseX(event.clientX);
-      setMouseY(event.clientY);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
+  const helixXTransform = useTransform(helixX, [0, windowWidth], [-50, 50]);
+  const helixYTransform = useTransform(helixY, [0, windowHeight], [-30, 30]);
+  const starXTransform = useTransform(starX, [0, windowWidth], [-40, 40]);
+  const starYTransform = useTransform(starY, [0, windowHeight], [-20, 20]);
 
   useEffect(() => {
+    // Check if window is defined before accessing its properties
+    if (typeof window !== 'undefined') {
+      setWindowWidth(window.innerWidth);
+      setWindowHeight(window.innerHeight);
+
+      const handleMouseMove = (event: MouseEvent) => {
+        setMouseX(event.clientX);
+        setMouseY(event.clientY);
+      };
+
+      window.addEventListener('mousemove', handleMouseMove);
+      return () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+      };
+    }
+  }, []); // Dependency array is empty, runs only once on mount
+
+  useEffect(() => {
+    // Update motion values based on mouse position
     helixX.set(mouseX);
     helixY.set(mouseY);
     starX.set(mouseX);
     starY.set(mouseY);
-  }, [mouseX, mouseY, helixX, helixY, starX, starY]); // Ensure all dependencies are included
+  }, [mouseX, mouseY, helixX, helixY, starX, starY]);
 
   return (
     <div className="text-white bg-black py-[72px] sm:py-24 text-center">
@@ -89,6 +97,7 @@ export const CallToAction = () => {
     </div>
   );
 };
+
 
 
 // "use client";

@@ -123,7 +123,7 @@
 }
 
 .animate-zoom-in {
-  animation: zoomIn 1s ease-in-out;
+  animation: zoomIn 500ms ease-in-out;
 }
 
 .opacity-0 {
