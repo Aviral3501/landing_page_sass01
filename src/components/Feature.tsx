@@ -28,7 +28,7 @@ const Feature = ({
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
     };
-  }, []);
+  }, [offSetX, offSetY]); // Add dependencies here
 
   return (
     <>
@@ -57,4 +57,5 @@ const Feature = ({
 };
 
 export default Feature;
+
 

@@ -20,7 +20,7 @@ export const Hero = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, []); // Dependency array is empty because it does not need to depend on mouseX or mouseY
 
   // Define motion values for parallax effect
   const cursorX = useMotionValue(0);
@@ -39,7 +39,7 @@ export const Hero = () => {
     cursorY.set(mouseY);
     messageX.set(mouseX);
     messageY.set(mouseY);
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY]); // Include mouseX and mouseY as dependencies
 
   return (
     <div className="bg-black text-white bg-[linear-gradient(to_bottom,#000,#200D42_30%,#4F21A1_65%,#A46EDB_90%)] py-[72px] sm:py-24 relative overflow-clip">

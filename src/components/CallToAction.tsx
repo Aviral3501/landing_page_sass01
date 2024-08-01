@@ -9,18 +9,6 @@ export const CallToAction = () => {
   const [mouseX, setMouseX] = useState<number>(0);
   const [mouseY, setMouseY] = useState<number>(0);
 
-  const handleMouseMove = (event: MouseEvent) => {
-    setMouseX(event.clientX);
-    setMouseY(event.clientY);
-  };
-
-  useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
   // Define motion values for parallax effect
   const helixX = useMotionValue(0);
   const helixY = useMotionValue(0);
@@ -33,12 +21,25 @@ export const CallToAction = () => {
   const starXTransform = useTransform(starX, [0, window.innerWidth], [-40, 40]);
   const starYTransform = useTransform(starY, [0, window.innerHeight], [-20, 20]);
 
+  // Update motion values based on mouse position
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      setMouseX(event.clientX);
+      setMouseY(event.clientY);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
   useEffect(() => {
     helixX.set(mouseX);
     helixY.set(mouseY);
     starX.set(mouseX);
     starY.set(mouseY);
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, helixX, helixY, starX, starY]); // Ensure all dependencies are included
 
   return (
     <div className="text-white bg-black py-[72px] sm:py-24 text-center">
