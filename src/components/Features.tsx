@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import EcosystemIcon from "../assets/icons/ecosystem.svg";
+import Feature from "./Feature";
 
 
 const features = [
@@ -35,13 +35,7 @@ export const Features = () => {
        </div>
         <div className="flex flex-col mx-[40px] gap-6  sm:flex-row  lg:gap-10 mt-6 md:mt-10 ">
           {features.map(({title,description})=>(
-            <div key={title} className=" border-white/30 rounded-xl px-5 py-16 text-center sm:flex-1 rainbow-border border-2">
-              <div className="inline-flex h-10 w-10 bg-white text-black justify-center items-center rounded-lg">
-                <EcosystemIcon/>
-              </div>
-              <h3 className="mt-6 font-bold rainbow-text opacity-80 text-2xl">{title}</h3>
-              <p className="mt-4 text-white/60">{description}</p>
-            </div>
+            <Feature key={title} title={title} description={description} />
           ))}
         </div>
       </div>

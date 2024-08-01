@@ -2,48 +2,132 @@
 import Image from "next/image";
 import appScreen from "../assets/images/app-screen.png";
 import useIntersectionObserver from "./useIntersectionObserver";
+import { useEffect, useState } from "react";
+
+// Define the type for the star properties
+type Star = {
+  top: string;
+  left: string;
+  opacity: number;
+  transform: string;
+};
+
+// Generate consistent star positions
+const generateStars = (numStars: number): Star[] => {
+  return Array.from({ length: numStars }, () => ({
+    top: `${Math.random() * 100}%`,
+    left: `${Math.random() * 100}%`,
+    opacity: Math.random() * 0.5 + 0.5,
+    transform: `scale(${Math.random() * 0.5 + 0.5})`,
+  }));
+};
 
 export const ProductShowcase = () => {
   const [ref, isIntersecting] = useIntersectionObserver({
     threshold: 0.7, // 70% of the component must be visible
   });
 
+  const [stars, setStars] = useState<Star[]>([]);
+
+  useEffect(() => {
+    setStars(generateStars(120));
+  }, []);
+
   return (
     <div className="relative text-white bg-black py-[72px] sm:py-24 overflow-hidden">
       {/* Star background */}
       <div className="absolute inset-0 pointer-events-none z-10">
-        {[...Array(120)].map((_, index) => (
+        {stars.map((star, index) => (
           <div
             key={index}
             className="star absolute w-1 h-1 bg-white rounded-full"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              opacity: Math.random() * 0.5 + 0.5,
-              transform: `scale(${Math.random() * 0.5 + 0.5})`,
-            }}
+            style={star}
           ></div>
         ))}
       </div>
       <div className="container mx-auto px-6 relative z-20">
         <div ref={ref} className="text-center">
-          <h2 className={`text-3xl text-center sm:text-4xl md:text-6xl font-bold tracking-tight ${isIntersecting ? "animate-fade-in" : "opacity-0"}`}>
+          <h2
+            className={`text-3xl text-center sm:text-4xl md:text-6xl font-bold tracking-tight ${
+              isIntersecting ? "animate-fade-in" : "opacity-0"
+            }`}
+          >
             Intuitive Interface
           </h2>
-         <div className="max-w-xl mx-auto">
-         <p className={`text-xl text-white/70 text-center mt-5 sm:mt-10 ${isIntersecting ? "animate-slide-in" : "opacity-0"}`}>
-            Celebrate the joy of accomplishment with an app designed to track your progress
-          </p>
-         </div>
+          <div className="max-w-xl mx-auto">
+            <p
+              className={`text-xl text-white/70 text-center mt-5 sm:mt-10 ${
+                isIntersecting ? "animate-slide-in" : "opacity-0"
+              }`}
+            >
+              Celebrate the joy of accomplishment with an app designed to track
+              your progress
+            </p>
+          </div>
         </div>
         <div className="relative mt-10 flex justify-center">
           <div className="absolute inset-0 bg-black z-20"></div>
-          <Image src={appScreen} alt="appScreen" className={`rounded-lg shadow-lg relative z-30 ${isIntersecting ? "animate-zoom-in" : "opacity-0"}`} />
+          <Image
+            src={appScreen}
+            alt="appScreen"
+            priority
+            className={`rounded-lg shadow-lg relative z-30 ${
+              isIntersecting ? "animate-zoom-in" : "opacity-0"
+            }`}
+          />
         </div>
       </div>
     </div>
   );
 };
+
+
+// "use client";
+// import Image from "next/image";
+// import appScreen from "../assets/images/app-screen.png";
+// import useIntersectionObserver from "./useIntersectionObserver";
+
+// export const ProductShowcase = () => {
+//   const [ref, isIntersecting] = useIntersectionObserver({
+//     threshold: 0.7, // 70% of the component must be visible
+//   });
+
+//   return (
+//     <div className="relative text-white bg-black py-[72px] sm:py-24 overflow-hidden">
+//       {/* Star background */}
+//       <div className="absolute inset-0 pointer-events-none z-10">
+//         {[...Array(120)].map((_, index) => (
+//           <div
+//             key={index}
+//             className="star absolute w-1 h-1 bg-white rounded-full"
+//             style={{
+//               top: `${Math.random() * 100}%`,
+//               left: `${Math.random() * 100}%`,
+//               opacity: Math.random() * 0.5 + 0.5,
+//               transform: `scale(${Math.random() * 0.5 + 0.5})`,
+//             }}
+//           ></div>
+//         ))}
+//       </div>
+//       <div className="container mx-auto px-6 relative z-20">
+//         <div ref={ref} className="text-center">
+//           <h2 className={`text-3xl text-center sm:text-4xl md:text-6xl font-bold tracking-tight ${isIntersecting ? "animate-fade-in" : "opacity-0"}`}>
+//             Intuitive Interface
+//           </h2>
+//          <div className="max-w-xl mx-auto">
+//          <p className={`text-xl text-white/70 text-center mt-5 sm:mt-10 ${isIntersecting ? "animate-slide-in" : "opacity-0"}`}>
+//             Celebrate the joy of accomplishment with an app designed to track your progress
+//           </p>
+//          </div>
+//         </div>
+//         <div className="relative mt-10 flex justify-center">
+//           <div className="absolute inset-0 bg-black z-20"></div>
+//           <Image src={appScreen} alt="appScreen" className={`rounded-lg shadow-lg relative z-30 ${isIntersecting ? "animate-zoom-in" : "opacity-0"}`} />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
 
 

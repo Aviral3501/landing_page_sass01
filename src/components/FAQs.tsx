@@ -3,6 +3,7 @@ import { useState } from "react";
 import PlusIcon from "../assets/icons/plus.svg";
 import clsx from "clsx";
 import MinusIcon from "../assets/icons/minus.svg";
+import { AnimatePresence, motion } from "framer-motion";
 
 const items = [
   {
@@ -27,36 +28,67 @@ const items = [
   },
 ];
 
-const AccordionItem =({question,answer}:{question:string , answer:string})=>{
-  const [isOpen,setIsOpen] = useState(false);
-  return(
+const AccordionItem = ({
+  question,
+  answer,
+}: {
+  question: string;
+  answer: string;
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
     <>
-      <div className="py-7  border-b border-white/30 " onClick={()=>setIsOpen(!isOpen)}>
-              <div className="flex items-center justify-center  md:max-w-4xl mx-auto mt-2">
-                <span className="flex-1 text-xl lg:text-2xl font-bold">{question}</span>
-                {isOpen ?  <MinusIcon/> : <PlusIcon/>} 
-              </div>
-              <div className={clsx("mt-4",{hidden:!isOpen,"text-lg text-white/70 lg:text-xl":isOpen ===true})}>{answer}</div>
-            </div>
-    </>
-  )
-}
-
-export const FAQs = () => {
-  return(
-    <>
-    <div className="bg-black text-white  py-[72px] sm:py-24">
-      <div className="container">
-        <h2 className=" text-center tracking-tight text-5xl font-bold sm:text-7xl">Frequently asked questions</h2>
-        <div className="mt-10 lg:mt-[45px] max-w-3xl mx-auto px-10 lg:p-0">
-          {items.map(({question,answer})=>(
-           <AccordionItem question={question} answer={answer} key={question}/>
-          ))}
+      <div
+        className="py-7  border-b border-white/30 "
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <div className="flex items-center justify-center  md:max-w-4xl mx-auto mt-2">
+          <span className="flex-1 text-xl lg:text-2xl font-bold">
+            {question}
+          </span>
+          {isOpen ? <MinusIcon /> : <PlusIcon />}
         </div>
 
+      <AnimatePresence>
+      {isOpen && (
+         <motion.div
+         className={clsx("", {
+           hidden: !isOpen,
+           "text-lg text-white/70 lg:text-xl": isOpen === true,
+         })}
+         initial={{ opacity: 0 ,height:0}}
+         animate={{ opacity: 1 , height:'auto'}}
+         exit={{ opacity: 0 ,height:0}}
+       >
+         {answer}
+       </motion.div>
+       )}
+      </AnimatePresence>
+    
       </div>
-
-    </div>
     </>
-  )
+  );
+};
+
+export const FAQs = () => {
+  return (
+    <>
+      <div className="bg-black text-white  py-[72px] sm:py-24">
+        <div className="container">
+          <h2 className=" text-center tracking-tight text-5xl font-bold sm:text-7xl">
+            Frequently asked questions
+          </h2>
+          <div className="mt-10 lg:mt-[45px] max-w-3xl mx-auto px-10 lg:p-0">
+            {items.map(({ question, answer }) => (
+              <AccordionItem
+                question={question}
+                answer={answer}
+                key={question}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };

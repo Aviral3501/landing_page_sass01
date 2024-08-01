@@ -29,7 +29,7 @@ export const LogoTicker = () => {
          before:bg-[linear-gradient(to_right,#000,rgb(0,0,0,0))]  after:bg-[linear-gradient(to_left,#000,rgb(0,0,0,0))]">
            <div className="flex gap-16 sm:gap-x-28 animate-scroll">
            {images.map(({src,alt})=>(
-              <Image src={src} alt={alt} className="flex-none h-8 w-auto"/>
+              <Image src={src} key={alt} alt={alt} className="flex-none h-8 w-auto"/>
             ))}
              {images.map(({ src, alt }) => (
               <Image key={`duplicate-${alt}`} src={src} alt={alt} className="flex-none h-8 w-auto" />
